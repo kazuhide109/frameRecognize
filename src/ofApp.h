@@ -6,7 +6,7 @@
 #include "ofxOsc.h"
 
 #define PORT 9002
-#define RESETSCOUNDS 120
+#define RESETSCOUNDS 30
 
 class ofApp : public ofBaseApp{
 
@@ -26,17 +26,55 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+     
+     void oscClient();
 		
       int w, h;
      int camW, camH;
      ofVideoGrabber vid;
+     ofFbo vidFbo;
+     ofFbo pointsFbo;
      ofFbo outFbo;
      ofImage testImg;
      ofxTrueTypeFontUL2 font;
      ofxTrueTypeFontUL2 fontBig;
      
      ofVec2f point[4];
+     int bolbNum;
      ofVec2f imageEdge[4];
+     
+     ofVec2f ave;
+     ofVec2f debugAve;
+     bool isSetPointers;
+     ofVec2f prePos[4];
+     ofVec2f p[4];
+     int e[4];
+     int framePose;
+     
+     int recMode;
+     float standStillTime;
+     bool bRec;
+     bool bPlayRec;
+     int recFrame = 0;
+     vector<ofPixels> savePixels;
+     vector<vector<ofVec2f>> saveTexcodePos;
+     int nRecFrame;
+     int fixFrame;
+     int currentFrame;
+     int maxLoopCnt = 4;
+     
+     int stateCount;
+     int playCounter;
+     ofMesh mesh;
+     
+     float accelX;
+     float accelY;
+     float accelZ;
+     float gyroX;
+     float gyroY;
+     float gyroZ;
+     bool switchState = 1;
+     float accelYfix;
      
      ofxOscReceiver receiver;
 };
